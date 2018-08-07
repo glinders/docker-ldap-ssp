@@ -1,0 +1,24 @@
+#!/bin/bash
+
+NAME=ldap-ssp
+
+IMAGE=docker-$NAME:0.9
+
+ENV="\
+ -e LDAP_URL=ldap://ubox0:389 \
+ -e LDAP_BINDDN=cn=admin,dc=salcom,dc=com \
+ -e LDAP_BINDPW=admin \
+ -e LDAP_BASE=dc=salcom,dc=com \
+"
+
+PORTS="-p 0.0.0.0:8080:80"
+
+RUN_OPTIONS="--restart=no --add-host=ubox0:192.168.1.51"
+
+docker build --tag $IMAGE -f Dockerfile .
+
+docker stop $NAME
+
+docker rm $NAME
+
+docker run $RUN_OPTIONS $ENV $PORTS --name $NAME -d $IMAGE

@@ -30,7 +30,8 @@ $ldap_bindpw = "{LDAP_BINDPW}";
 $ldap_base = "{LDAP_BASE}";
 $ldap_login_attribute = "uid";
 $ldap_fullname_attribute = "cn";
-$ldap_filter = "(&(objectClass=inetOrgPerson)($ldap_login_attribute={login}))";
+#$ldap_filter = "(&(objectClass=inetOrgPerson)($ldap_login_attribute={login}))";
+$ldap_filter = "($ldap_login_attribute={login})";
 
 # Active Directory mode
 # true: use unicodePwd as password field
@@ -130,7 +131,7 @@ $answer_attribute = "info";
 # Use tokens?
 # true (default)
 # false
-$use_tokens = true;
+$use_tokens = false;
 # Crypt tokens?
 # true (default)
 # false
