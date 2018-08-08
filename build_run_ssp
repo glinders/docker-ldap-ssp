@@ -1,8 +1,8 @@
 #!/bin/bash
 
-NAME=ldap-ssp
+NAME=ldap-ssp-lam-app
 
-IMAGE=docker-$NAME:0.9
+IMAGE=$NAME:1.0
 
 ENV="\
  -e LDAP_URL=ldap://ubox0:389 \
@@ -11,7 +11,7 @@ ENV="\
  -e LDAP_BASE=dc=salcom,dc=com \
 "
 
-PORTS="-p 0.0.0.0:8080:80"
+PORTS="-p 127.0.0.1:84:80"
 
 RUN_OPTIONS="--restart=no --add-host=ubox0:192.168.1.51"
 
