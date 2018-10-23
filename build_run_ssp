@@ -18,6 +18,13 @@ ENV_UBOX1="\
  -e LDAP_BASE=dc=salcom,dc=com \
 "
 
+ENV_UBOX2="\
+ -e LDAP_URL=ldap://ubox2:389 \
+ -e LDAP_BINDDN=cn=admin,dc=salcom,dc=com \
+ -e LDAP_BINDPW=admin \
+ -e LDAP_BASE=dc=salcom,dc=com \
+"
+
 HOSTNAME=`hostname`
 
 case "$HOSTNAME" in
@@ -27,6 +34,9 @@ case "$HOSTNAME" in
   ubox1)
     ENV=$ENV_UBOX1
     ;;
+  ubox2)
+    ENV=$ENV_UBOX2
+    ;;
   *)
     echo unknown host $HOSTNAME
     exit 1
@@ -35,7 +45,7 @@ esac
 
 PORTS="-p 127.0.0.1:84:80"
 
-RUN_OPTIONS="--restart=no --add-host=ubox0:192.168.1.51 --add-host=ubox1:192.168.1.75"
+RUN_OPTIONS="--restart=no --add-host=ubox0:192.168.1.51 --add-host=ubox1:192.168.1.75 --add-host=ubox2:192.168.1.18"
 
 docker build --tag $IMAGE -f Dockerfile .
 
